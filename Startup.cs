@@ -22,14 +22,25 @@ namespace WebStore
         }
 
         public IConfiguration Configuration { get; }
+        string policyName = "MyPolicy";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy(policyName, builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+
+            }));
             services.AddDbContext<WebStoreContext>();
             services.AddScoped<IWebStoreRepository, WebStoreRepository>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            
+            
+            
             services.AddControllers();
         }
 
@@ -43,7 +54,10 @@ namespace WebStore
 
             app.UseRouting();
 
+            app.UseCors(policyName);
+
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
