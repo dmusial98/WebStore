@@ -8,13 +8,4 @@ export class Product {
   currency: String
   amount: number
   opinions: Opinion[]
-
-  //constructor() {
-  //  this.name = ""
-  //  this.description = ""
-  //  this.currency = ""
-  //  this.id = 0
-  //  this.price = 0
-  //  this.amount = 0
-  //}
 }

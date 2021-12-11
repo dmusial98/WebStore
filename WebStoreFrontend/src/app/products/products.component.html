@@ -1,8 +1,7 @@
 <h2>Products:</h2>
-
 <ul>
   <li *ngFor="let product of products">
-    <h3>ID: {{ product.id }}</h3>
+    <h3>Id: {{ product.id }}</h3>
     <h5>Nazwa: {{ product.name }}</h5>
     <h5>Opis: {{ product.description }}</h5>
     <h5>Cena {{ product.price }} zł</h5>
@@ -11,7 +10,7 @@
       Opinie:
       <ul>
         <li *ngFor="let opinion of product.opinions">
-          <h5>ID: {{opinion.id}}</h5>
+          <h5>Id: {{opinion.id}}</h5>
           <h5>Treść: {{opinion.content}}</h5>
           <h5>Wartość: {{opinion.value}}</h5>
         </li>
