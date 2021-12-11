@@ -14,15 +14,14 @@ import { Product } from 'src/app/data/product'
 export class AppComponent {
   title = 'WebStoreFrontend';
 
-  //product: Observable<Product> = new Observable<Product>();
   productSubscription: Subscription;
-  product: Product
+  products: Product[];
 
   constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
-    this.productSubscription = this.productService.getAllProducts().subscribe(_product => console.log(_product));
-    console.log(this.product);
+    this.productSubscription = this.productService.getAllProducts().subscribe(_products => this.products = _products);
+    //this.productSubscription = this.productService.getAllProducts().subscribe(_product => console.log(_product));
   }
 }
