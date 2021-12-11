@@ -76,9 +76,17 @@ namespace WebStore.Data
                     Content = "Dobry stosunek jakość - cena",
                     Value = 4,
                     CriticId = 2
+                },
+                new 
+                {
+                    Id=2,
+                    ProductId = 1,
+                    Content = "Wszystko w jak największym porządku",
+                    Value = 5,
+                    CriticId = 1
                 });
         }
-
+        
 
     }
 }
