@@ -14,4 +14,9 @@ export class ProductService {
   getAllProductsWithOpinions(): Observable<Product[]> {
     return this.http.get<Product[]>('http://localhost:5000/api/products');
   }
+
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(`http://localhost:5000/api/products/${id}`);
+  }
+
 }
