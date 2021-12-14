@@ -3,21 +3,38 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebStore.Data;
 
 namespace WebStore.Migrations
 {
     [DbContext(typeof(WebStoreContext))]
-    partial class WebStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20211214183425_store-migration2")]
+    partial class storemigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("WebStore.Data.Entities.Description", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescriptionText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Description");
+                });
 
             modelBuilder.Entity("WebStore.Data.Entities.Opinion", b =>
                 {
@@ -145,10 +162,15 @@ namespace WebStore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AboutUsDescriptionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AboutUsDescriptionId");
 
                     b.ToTable("Store");
 
@@ -157,35 +179,6 @@ namespace WebStore.Migrations
                         {
                             Id = 1,
                             Address = "ul. Poziomkowa 88 24-987 Warszawa"
-                        });
-                });
-
-            modelBuilder.Entity("WebStore.Data.Entities.StoreDescription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DescriptionText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StoreId")
-                        .IsUnique();
-
-                    b.ToTable("StoreDescription");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DescriptionText = "Nasz sklep zajmuje się sprzedażą sprzętu sportowego, mamy wieloletnie doświadczeniue w dostosowywaniu oferty do potrzeb klienta.",
-                            StoreId = 1
                         });
                 });
 
@@ -400,13 +393,13 @@ namespace WebStore.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("WebStore.Data.Entities.StoreDescription", b =>
+            modelBuilder.Entity("WebStore.Data.Entities.Store", b =>
                 {
-                    b.HasOne("WebStore.Data.Entities.Store", null)
-                        .WithOne("StoreDescription")
-                        .HasForeignKey("WebStore.Data.Entities.StoreDescription", "StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("WebStore.Data.Entities.Description", "AboutUsDescription")
+                        .WithMany()
+                        .HasForeignKey("AboutUsDescriptionId");
+
+                    b.Navigation("AboutUsDescription");
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.StoreEMail", b =>
@@ -423,7 +416,7 @@ namespace WebStore.Migrations
             modelBuilder.Entity("WebStore.Data.Entities.StoreHours", b =>
                 {
                     b.HasOne("WebStore.Data.Entities.Store", "Store")
-                        .WithMany("StoreOpenedHours")
+                        .WithMany("OpenedStoreHours")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -451,9 +444,7 @@ namespace WebStore.Migrations
                 {
                     b.Navigation("EMails");
 
-                    b.Navigation("StoreDescription");
-
-                    b.Navigation("StoreOpenedHours");
+                    b.Navigation("OpenedStoreHours");
 
                     b.Navigation("TelephoneNumbers");
                 });
