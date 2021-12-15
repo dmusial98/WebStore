@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebStore.Data;
 
 namespace WebStore.Migrations
 {
     [DbContext(typeof(WebStoreContext))]
-    partial class WebStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20211214184729_store-migration4")]
+    partial class storemigration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -411,29 +413,35 @@ namespace WebStore.Migrations
 
             modelBuilder.Entity("WebStore.Data.Entities.StoreEMail", b =>
                 {
-                    b.HasOne("WebStore.Data.Entities.Store", null)
+                    b.HasOne("WebStore.Data.Entities.Store", "Store")
                         .WithMany("EMails")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.StoreHours", b =>
                 {
-                    b.HasOne("WebStore.Data.Entities.Store", null)
+                    b.HasOne("WebStore.Data.Entities.Store", "Store")
                         .WithMany("StoreOpenedHours")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.StoreTelephoneNumber", b =>
                 {
-                    b.HasOne("WebStore.Data.Entities.Store", null)
+                    b.HasOne("WebStore.Data.Entities.Store", "Store")
                         .WithMany("TelephoneNumbers")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("WebStore.Data.Entities.Product", b =>

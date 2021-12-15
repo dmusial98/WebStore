@@ -22,6 +22,7 @@ namespace WebStore.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Opinion> Opinions { get; set; }
         public DbSet<ProductInCart> ProductsInCarts { get; set; }
+        public DbSet<Store> Store { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -85,6 +86,102 @@ namespace WebStore.Data
                     Value = 5,
                     CriticId = 1
                 });
+
+            modelBuilder.Entity<Store>().HasData(
+                new
+                {
+                    Id = 1,
+                    Address = "ul. Poziomkowa 88 24-987 Warszawa"
+                });
+
+            modelBuilder.Entity<StoreDescription>().HasData(
+                new StoreDescription
+                {
+                    Id = 1,
+                    StoreId = 1,
+                    DescriptionText = "Nasz sklep zajmuje się sprzedażą sprzętu sportowego, mamy wieloletnie doświadczeniue w dostosowywaniu oferty do potrzeb klienta."
+                });
+
+            modelBuilder.Entity<StoreTelephoneNumber>().HasData(
+                new StoreTelephoneNumber
+                {
+                    Id = 1, 
+                    StoreId = 1,
+                    TelephoneNumberContent = "+48 123 456 789"
+                },
+                new StoreTelephoneNumber
+                {
+                    Id = 2, 
+                    StoreId = 1,
+                    TelephoneNumberContent = "+48 32 12 36 647"
+                }
+            );
+
+            modelBuilder.Entity<StoreEMail>().HasData(
+                new StoreEMail
+                {
+                    Id = 1, 
+                    StoreId = 1,
+                    EmailContent = "good.store@gmail.com"
+                },
+                new StoreEMail
+                {
+                    Id = 2,
+                    StoreId = 1,
+                    EmailContent = "dobry.sklep@gmail.com"
+                });
+
+            modelBuilder.Entity<StoreHours>().HasData(
+                new StoreHours
+                {
+                    Id = 1,
+                    StoreId = 1,
+                    Day = DayOfWeek.Monday,
+                    OpenHour = "8:00",
+                    CloseHour = "16:00"
+                },
+                new StoreHours
+                {
+                    Id = 2,
+                    StoreId = 1,
+                    Day = DayOfWeek.Tuesday,
+                    OpenHour = "8:00",
+                    CloseHour = "16:00"
+                },
+                new StoreHours
+                {
+                    Id = 3,
+                    StoreId = 1,
+                    Day = DayOfWeek.Wednesday,
+                    OpenHour = "8:00",
+                    CloseHour = "16:00"
+                },
+                new StoreHours
+                {
+                    Id = 4,
+                    StoreId = 1,
+                    Day = DayOfWeek.Thursday,
+                    OpenHour = "8:00",
+                    CloseHour = "16:00"
+                },
+                new StoreHours
+                {
+                    Id = 5,
+                    StoreId = 1,
+                    Day = DayOfWeek.Friday,
+                    OpenHour = "8:00",
+                    CloseHour = "16:00"
+                },
+                new StoreHours
+                {
+                    Id = 6,
+                    StoreId = 1,
+                    Day = DayOfWeek.Saturday,
+                    OpenHour = "8:00",
+                    CloseHour = "16:00"
+                });
+
+           
         }
         
 

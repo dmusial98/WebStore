@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using WebStore.Data;
 
-namespace CoreCodeCamp.Data
+namespace CoreWebStore.Data
 {
   public class WebStoreContextFactory : IDesignTimeDbContextFactory<WebStoreContext>
   {

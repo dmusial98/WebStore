@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using WebStore.Data;
 using WebStore.Data.Entities;
 
-namespace CoreCodeCamp.Data
+namespace CoreWebStore.Data
 {
     public class WebStoreRepository : IWebStoreRepository
     {
@@ -69,6 +69,15 @@ namespace CoreCodeCamp.Data
             return await query.FirstAsync();
         }
 
-        
+        public async Task<Store[]> GetStoreAsync()
+        {
+            var query = _context.Store
+                .Include(s => s.StoreDescription)
+                .Include(s => s.StoreOpenedHours)
+                .Include(s => s.TelephoneNumbers)
+                .Include(s => s.EMails);
+
+            return await query.ToArrayAsync();
+        }
     }
 }
