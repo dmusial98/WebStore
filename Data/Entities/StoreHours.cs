@@ -11,7 +11,7 @@ namespace WebStore.Data.Entities
         public DayOfWeek Day { get; set; }
         public string OpenHour { get; set; }
         public string CloseHour { get; set; }
-        public Store Store { get; set; }
+        //public Store Store { get; set; }
         public int StoreId { get; set; }
     }
 }

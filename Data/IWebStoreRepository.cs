@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebStore.Data.Entities;
 
-namespace CoreCodeCamp.Data
+namespace CoreWebStore.Data
 {
   public interface IWebStoreRepository
   {
@@ -21,6 +21,8 @@ namespace CoreCodeCamp.Data
     //Task<Talk> GetTalkByMonikerAsync(string moniker, int talkId, bool includeSpeakers = false);
     Task<Product[]> GetAllProductsAsync();
     Task<Product> GetProductByIdAsync(int id);
+
+    Task<Store[]> GetStoreAsync();
 
     // Speaker
     //Task<Speaker[]> GetSpeakersByMonikerAsync(string moniker);

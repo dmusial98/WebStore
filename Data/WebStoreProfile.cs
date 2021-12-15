@@ -23,6 +23,22 @@ namespace WebStore.Data
 
             this.CreateMap<Opinion, OpinionModel>()
                 .ReverseMap();
+
+            this.CreateMap<Store, StoreModel>()
+                .ReverseMap();
+
+            this.CreateMap<StoreDescription, StoreDescriptionModel>()
+                .ReverseMap();
+
+            this.CreateMap<StoreHours, StoreHoursModel>()
+                .ReverseMap();
+
+            this.CreateMap<StoreTelephoneNumber, StoreTelephoneNumberModel>()
+                .ReverseMap();
+
+            this.CreateMap<StoreEMail, StoreEMailModel>()
+                .ReverseMap();
+
         }
     }
 }

@@ -8,7 +8,6 @@ namespace WebStore.Models
     public class StoreTelephoneNumberModel
     {
         public int Id { get; set; }
-        public StoreModel Store { get; set; }
         public int StoreId { get; set; }
         public string TelephoneNumberContent { get; set; }
     }
