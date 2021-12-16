@@ -22,7 +22,7 @@ namespace CoreWebStore.Data
     Task<Product[]> GetAllProductsAsync();
     Task<Product> GetProductByIdAsync(int id);
 
-    Task<Store[]> GetStoreAsync();
+    Task<Store> GetStoreAsync();
 
     // Speaker
     //Task<Speaker[]> GetSpeakersByMonikerAsync(string moniker);

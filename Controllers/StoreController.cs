@@ -28,12 +28,12 @@ namespace WebStore.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<StoreModel[]>> Get()
+        public async Task<ActionResult<StoreModel>> Get()
         {
             try
             {
                 var result = await _repository.GetStoreAsync();
-                return _mapper.Map<StoreModel[]>(result);
+                return _mapper.Map<StoreModel>(result);
             }
             catch (Exception)
             {

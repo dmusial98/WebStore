@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CoreWebStore.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
 using WebStore.Data.Entities;
 using WebStore.Models;
@@ -27,7 +28,7 @@ namespace WebStore.Controllers
             _linkGenerator = linkGenerator;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<ProductModel[]>> Get()
         {
             try

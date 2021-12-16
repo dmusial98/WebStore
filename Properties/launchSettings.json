@@ -20,7 +20,7 @@
     "WebStore": {
       "commandName": "Project",
       "launchBrowser": false,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "api/store",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

@@ -69,15 +69,15 @@ namespace CoreWebStore.Data
             return await query.FirstAsync();
         }
 
-        public async Task<Store[]> GetStoreAsync()
+        public async Task<Store> GetStoreAsync()
         {
-            var query = _context.Store
+            var query = _context.Store.Where(s => s.Id == 1)
                 .Include(s => s.StoreDescription)
                 .Include(s => s.StoreOpenedHours)
                 .Include(s => s.TelephoneNumbers)
                 .Include(s => s.EMails);
 
-            return await query.ToArrayAsync();
+            return await query.FirstAsync();
         }
     }
 }
