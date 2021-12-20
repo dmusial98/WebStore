@@ -55,6 +55,18 @@ namespace CoreWebStore.Data
             return await query.FirstAsync();
         }
 
+        public async Task<User> GetUserByLoginAndPasswordAsync(string login, string password)
+        {
+            var query = _context.Users.Where(u => u.Login == login && u.Password == password);
+            return await query.FirstAsync();
+        }
+
+        public async Task<User> GetUserByLoginAsync(string login)
+        {
+            var query = _context.Users.Where(u => u.Login == login);
+            return await query.FirstAsync();
+        }
+
         public async Task<Product[]> GetAllProductsAsync()
         {
            var query = _context.Products.Include(p => p.Opinions).ThenInclude(p => p.Critic);

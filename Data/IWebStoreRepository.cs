@@ -15,6 +15,10 @@ namespace CoreWebStore.Data
     // Users
     Task<User[]> GetAllUsersAsync();
     Task<User> GetUserByIdAsync(int id);
+
+    Task<User> GetUserByLoginAndPasswordAsync(string login, string password);
+    Task<User> GetUserByLoginAsync(string login);
+    
     //Task<Camp[]> GetAllCampsByEventDate(DateTime dateTime, bool includeTalks = false);
 
     // Products

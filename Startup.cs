@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using WebStore.Auth;
 using WebStore.Data;
 
 namespace WebStore
@@ -60,6 +61,7 @@ namespace WebStore
                     };
                 });
 
+            services.AddTransient<ITokenService, TokenService>();
             services.AddControllers();
         }
 

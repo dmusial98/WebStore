@@ -41,6 +41,7 @@ namespace WebStore.Data
                     Login = "admin1",
                     Password = "strongPassword1",
                     Addres = "ul. Konwaliowa 36 27-512 Rzeszów",
+                    RefreshTokenExpiryTime = DateTime.Now
                 },
                 new
                 {
@@ -48,7 +49,8 @@ namespace WebStore.Data
                     IsAdmin = false,
                     Login = "user1",
                     Password = "strongPassword2",
-                    Address = "pl. Piłsudskiego 1/3 11-111 Ząbkowice"
+                    Address = "pl. Piłsudskiego 1/3 11-111 Ząbkowice",
+                    RefreshTokenExpiryTime = DateTime.Now
                 });
 
             modelBuilder.Entity<Product>().HasData(
