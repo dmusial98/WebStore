@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from "src/app/product.service";
 import { Observable } from 'rxjs';
 import { Subscription } from "rxjs";
-
 import { Product } from 'src/app/data/product'
 
 

@@ -43,6 +43,7 @@ namespace WebStore.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<ActionResult<ProductModel>> Get(int id)
         {
             try
@@ -60,7 +61,7 @@ namespace WebStore.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<ProductModel>> Post(ProductModel model)
         {
             try
@@ -81,6 +82,7 @@ namespace WebStore.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize]
         public async Task<ActionResult<ProductModel>> Put(int id, ProductModel model)
         {
             try
@@ -102,6 +104,7 @@ namespace WebStore.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             try

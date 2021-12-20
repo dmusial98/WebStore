@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CoreWebStore.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
 using WebStore.Data.Entities;
 using WebStore.Models;
@@ -28,7 +29,7 @@ namespace WebStore.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<UserModel[]>> Get()
         {
             try
@@ -43,6 +44,7 @@ namespace WebStore.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<ActionResult<UserModel>> Get(int id)
         {
             try
@@ -56,7 +58,7 @@ namespace WebStore.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<UserModel>> Post(UserModel model)
         {
             try
@@ -77,6 +79,7 @@ namespace WebStore.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize]
         public async Task<ActionResult<UserModel>> Put(int id, UserModel model)
         {
             try
@@ -98,6 +101,7 @@ namespace WebStore.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             try

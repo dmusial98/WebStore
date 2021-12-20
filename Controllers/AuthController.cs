@@ -65,7 +65,7 @@ namespace WebStore.Controllers
 
                 return Ok(new
                 {
-                    Token = accessToken,
+                    AccessToken = accessToken,
                     RefreshToken = refreshToken
                 });
             }
