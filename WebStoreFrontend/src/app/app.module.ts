@@ -13,7 +13,6 @@ import { ProductsComponent } from './products/products.component';
 import { ProductService } from "./product.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
-import { MainPageComponent } from './main-page/main-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -24,8 +23,7 @@ export function tokenGetter() {
     AppComponent,
     ProductsComponent,
     LoginComponent,
-    HomeComponent,
-    MainPageComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -33,12 +31,6 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'home', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] }
-    ]),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
