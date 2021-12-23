@@ -61,7 +61,7 @@ namespace WebStore.Controllers
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
 
-                _repository.SaveChangesAsync();
+                await _repository.SaveChangesAsync();
 
                 return Ok(new
                 {
@@ -83,7 +83,7 @@ namespace WebStore.Controllers
             var user = await _repository.GetUserByLoginAsync(username);
             if (user == null) return BadRequest();
             user.RefreshToken = null;
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
             return NoContent();
         }
     }

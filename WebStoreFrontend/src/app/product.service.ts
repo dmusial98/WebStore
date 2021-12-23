@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from'@angular/common/http';
+import { HttpClient, HttpHeaders } from'@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Product } from 'src/app/data/product'
@@ -12,7 +12,14 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAllProductsWithOpinions(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:5000/api/products');
+    let token = localStorage.getItem("jwt");
+
+    return this.http.get<Product[]>("http://localhost:5000/api/products",
+      {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json"
+        })
+      });
   }
 
   getProduct(id: number): Observable<Product> {

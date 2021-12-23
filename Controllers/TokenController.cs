@@ -48,7 +48,7 @@ namespace WebStore.Controllers
             var newAccessToken = _tokenService.GenerateAccessToken(principal.Claims);
             var newRefreshToken = _tokenService.GenerateRefreshToken();
             user.RefreshToken = newRefreshToken;
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
             return new ObjectResult(new
             {
@@ -66,7 +66,7 @@ namespace WebStore.Controllers
             if (user == null) 
                 return BadRequest();
             user.RefreshToken = null;
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
             return NoContent();
         }
     }

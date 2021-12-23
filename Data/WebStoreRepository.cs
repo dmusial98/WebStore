@@ -69,9 +69,9 @@ namespace CoreWebStore.Data
 
         public async Task<Product[]> GetAllProductsAsync()
         {
-           var query = _context.Products.Include(p => p.Opinions).ThenInclude(p => p.Critic);
+            var query = _context.Products.Include(p => p.Opinions).ThenInclude(p => p.Critic);
 
-           return await query.ToArrayAsync();
+            return await query.ToArrayAsync();
         }
 
         public async Task<Product> GetProductByIdAsync(int id)

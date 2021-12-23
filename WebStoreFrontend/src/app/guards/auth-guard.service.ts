@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtHelper: JwtHelperService, private router: Router, private http: HttpClient) {}
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private http: HttpClient) { }
 
   async canActivate() {
     const token = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
-      console.log(this.jwtHelper.decodeToken(token));
+      /*console.log(this.jwtHelper.decodeToken(token));*/
       return true;
     }
     const isRefreshSuccess = await this.tryRefreshingTokens(token);
