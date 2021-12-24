@@ -1,22 +1,88 @@
 <app-nav-bar></app-nav-bar>
 
-<h2>Products:</h2>
+<div class="mt-3 container">
+  <div class="row">
+
+    <!--kolumna do wyboru kategorii produktów-->
+    <div class="col-lg justify-content-start">
+      Kategorie
+    </div>
+    <div class="col-lg-10">
+      <div class="container">
+
+        <!--wiersz z opcją filtrowania-->
+        <div class="row justify-content-end">
+          <div class="col-md-auto align-self-center">Filtruj po:</div>
+          <div class="col-md-auto">
+            <div class="dropdown justify-content-end">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                Cena: najniższa
+              </button>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <li><a class="dropdown-item">Cena: najwyższa</a></li>
+                <li><a class="dropdown-item">Cena: najniższa</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item">Ocena: największa</a></li>
+                <li><a class="dropdown-item">Ocena: najniższa</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item">Ilość: najwyższa</a></li>
+                <li><a class="dropdown-item">Ilość: najniższa</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!--lista produktów-->
+        <div class="mt-4 row">
+
+          <!--zdjecie produktu-->
+          <div class="col-6">
+            
+          </div>
+          <div class="col-3">
+            <div class="container">
+              <div class="row">
+                <div class="col align-items-center">
+                  <p class="text-end">Nazwa:</p>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <p class="text-end">Cena:</p>
+              </div>
+              <div class="row align-items-center">
+                <p class="text-end">Ocena:</p>
+              </div>
+            </div>
+            
+          </div>
+          <div class="col-3">
+            <div class="row">
+              <p class="text-center">Nazwa produktu</p>
+            </div>
+            <div class="row">
+              <p class="text-center">Cena produktu</p>
+            </div>
+            <div class="row">
+              <p class="text-center">Ocena produktu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+
+
+</div>
+
+
+
+
+<!--h2>Produkty:</h2>
 <ul>
   <li *ngFor="let product of products">
-    <h3>Id: {{ product.id }}</h3>
-    <h5>Nazwa: {{ product.name }}</h5>
-    <h5>Opis: {{ product.description }}</h5>
-    <h5>Cena {{ product.price }} zł</h5>
-    <h5>Ilość w magazynie: {{ product.amount }}</h5>
-    <h5>
-      Opinie:
-      <ul>
-        <li *ngFor="let opinion of product.opinions">
-          <h5>Id: {{opinion.id}}</h5>
-          <h5>Treść: {{opinion.content}}</h5>
-          <h5>Wartość: {{opinion.value}}</h5>
-        </li>
-      </ul>
-    </h5>
+    
   </li>
-</ul>
+</ul>-->
