@@ -28,7 +28,7 @@ namespace WebStore.Controllers
             _linkGenerator = linkGenerator;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet/*, Authorize*/]
         public async Task<ActionResult<ProductModel[]>> Get()
         {
             try
@@ -43,7 +43,7 @@ namespace WebStore.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<ProductModel>> Get(int id)
         {
             try
@@ -61,7 +61,7 @@ namespace WebStore.Controllers
             }
         }
 
-        [HttpPost, Authorize]
+        [HttpPost/*, Authorize*/]
         public async Task<ActionResult<ProductModel>> Post(ProductModel model)
         {
             try
@@ -82,7 +82,7 @@ namespace WebStore.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<ProductModel>> Put(int id, ProductModel model)
         {
             try
@@ -104,7 +104,7 @@ namespace WebStore.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             try

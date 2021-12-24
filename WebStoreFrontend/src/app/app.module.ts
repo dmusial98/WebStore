@@ -4,15 +4,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from "@auth0/angular-jwt";
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from './guards/auth-guard.service';
+//import { AuthGuard } from './guards/auth-guard.service';
 import { HomeComponent } from './home/home.component';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductService } from "./product.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -23,23 +23,24 @@ export function tokenGetter() {
     AppComponent,
     ProductsComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:5000"],
-        disallowedRoutes: []
-      }
-    })
+    NgbModule
+    //JwtModule.forRoot({
+    //  config: {
+    //    tokenGetter: tokenGetter,
+    //    allowedDomains: ["localhost:5000"],
+    //    disallowedRoutes: []
+    //  }
+    //})
   ],
-  providers: [AuthGuard],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
