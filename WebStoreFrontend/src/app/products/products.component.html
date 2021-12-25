@@ -11,7 +11,7 @@
       <div class="container">
 
         <!--wiersz z opcją filtrowania-->
-        <div class="row justify-content-end">
+        <div class="mb-4 row justify-content-end">
           <div class="col-md-auto align-self-center">Filtruj po:</div>
           <div class="col-md-auto">
             <div class="dropdown justify-content-end">
@@ -33,37 +33,36 @@
         </div>
 
         <!--lista produktów-->
-        <div class="mt-4 row">
+        <div *ngFor="let product of products" class="mb-3 border border-info rounded bg-light">
+          <div class="row ">
 
-          <!--zdjecie produktu-->
-          <div class="col-6">
-            
-          </div>
-          <div class="col-3">
-            <div class="container">
+            <!--zdjecie produktu-->
+            <div class="col-6 align-self-center">
               <div class="row">
-                <div class="col align-items-center">
-                  <p class="text-end">Nazwa:</p>
-                </div>
-              </div>
-              <div class="row align-items-center">
-                <p class="text-end">Cena:</p>
-              </div>
-              <div class="row align-items-center">
-                <p class="text-end">Ocena:</p>
+                <p class="text-center">Zdjęcie produktu</p>
               </div>
             </div>
-            
-          </div>
-          <div class="col-3">
-            <div class="row">
-              <p class="text-center">Nazwa produktu</p>
+            <div class="col-3 align-self-center">
+              <div class="my-2 text-end">
+                Nazwa:
+              </div>
+              <div class="my-2 text-end">
+                Cena:
+              </div>
+              <div class="my-2 text-end">
+                Ocena:
+              </div>
             </div>
-            <div class="row">
-              <p class="text-center">Cena produktu</p>
-            </div>
-            <div class="row">
-              <p class="text-center">Ocena produktu</p>
+            <div class="col-3 align-self-center">
+              <div class="my-2 text-center">
+                {{product.name}}
+              </div>
+              <div class="my-2 text-center">
+               {{product.price}} zł
+              </div>
+              <div class="my-2 text-center">
+                5/5
+              </div>
             </div>
           </div>
         </div>
@@ -71,8 +70,8 @@
     </div>
   </div>
 
-  
-  
+
+
 
 
 </div>
@@ -83,6 +82,6 @@
 <!--h2>Produkty:</h2>
 <ul>
   <li *ngFor="let product of products">
-    
+
   </li>
 </ul>-->
