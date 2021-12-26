@@ -18,9 +18,18 @@ namespace CoreWebStore.Data
         Task<User> GetUserByLoginAndPasswordAsync(string login, string password);
         Task<User> GetUserByLoginAsync(string login);
        
+        //Categories
+        Task<Category[]> GetAllCategoriesAsync();
+        Task<Category> GetCategoryByIdAsync(int id);
+
+        // Products
         Task<Product[]> GetAllProductsAsync();
         Task<Product> GetProductByIdAsync(int id);
+        Task<Product[]> GetProductsByCategoryAsync(int categoryId);
 
+        //Store
         Task<Store> GetStoreAsync();
+
+
     }
 }

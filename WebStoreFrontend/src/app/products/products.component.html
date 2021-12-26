@@ -6,20 +6,20 @@
     <!--slajdy ze zdjęciami-->
     <div id="carouselExampleIndicators_main" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators_main" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators_main" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators_main" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators_main" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators_main" class="active" data-bs-slide-to="2" aria-label="Slide 3"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators_main" data-bs-slide-to="3" aria-label="Slide 4"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators_main" data-bs-slide-to="4" aria-label="Slide 5"></button>
       </div>
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div class="carousel-item">
           <img src="assets/store_1.jpg" class="d-block w-100" alt="store_1">
         </div>
         <div class="carousel-item">
           <img src="assets/store_2.jpg" class="d-block w-100" alt="store_2">
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item active">
           <img src="assets/table_tenis_1.jpg" class="d-block w-100" alt="table_tenis_1">
         </div>
         <div class="carousel-item">
@@ -40,8 +40,6 @@
       </button>
     </div>
 
-
-
   </div>
 
   <div class="row">
@@ -54,17 +52,12 @@
         </h5>
         <div class="my-1 row">
           <div class="text-center">
-            - kategoria 1
+            <button (click)="onCategoryChosen(-1)" class="btn btn-light">Wszystkie</button>
           </div>
         </div>
-        <div class="my-1 row">
+        <div *ngFor="let category of categories" class="my-1 row">
           <div class="text-center">
-            - kategoria 2
-          </div>
-        </div>
-        <div class="my-1 row">
-          <div class="text-center">
-            - kategoria 3
+            <button (click)="onCategoryChosen(category.id)" class="btn btn-light">{{category.name}}</button>
           </div>
         </div>
       </div>
@@ -75,21 +68,21 @@
 
         <!--wiersz z opcją filtrowania-->
         <div class="mb-4 row justify-content-end">
-          <div class="col-md-auto align-self-center">Filtruj po:</div>
+          <div class="col-md-auto align-self-center">Sortuj po:</div>
           <div class="col-md-auto">
             <div class="dropdown justify-content-end">
               <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                Cena: najniższa
+                {{sortByDropdownButtonContent}}
               </button>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item">Cena: najwyższa</a></li>
-                <li><a class="dropdown-item">Cena: najniższa</a></li>
+                <li><button (click)="onSortProductsClick('price - descending')" class="dropdown-item">Cena: najwyższa</button></li>
+                <li><button (click)="onSortProductsClick('price - growingly')" class="dropdown-item">Cena: najniższa</button></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item">Ocena: największa</a></li>
-                <li><a class="dropdown-item">Ocena: najniższa</a></li>
+                <li><button (click)="onSortProductsClick('mark - descending')" class="dropdown-item">Ocena: największa</button></li>
+                <li><button (click)="onSortProductsClick('mark - growingly')" class="dropdown-item">Ocena: najniższa</button></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item">Ilość: najwyższa</a></li>
-                <li><a class="dropdown-item">Ilość: najniższa</a></li>
+                <li><button (click)="onSortProductsClick('amount - descending')" class="dropdown-item">Ilość: najwyższa</button></li>
+                <li><button (click)="onSortProductsClick('amount - growingly')" class="dropdown-item">Ilość: najniższa</button></li>
               </ul>
             </div>
           </div>
@@ -125,8 +118,8 @@
               </div>
 
 
-              <!--<img src="assets/waldner-1000.jpg" alt="waldner_1000"/>-->
             </div>
+
 
             <!--informacje o produkcie-->
             <div class="col-6 align-self-center">

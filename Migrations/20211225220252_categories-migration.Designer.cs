@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebStore.Data;
 
 namespace WebStore.Migrations
 {
     [DbContext(typeof(WebStoreContext))]
-    partial class WebStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20211225220252_categories-migration")]
+    partial class categoriesmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace WebStore.Migrations
 
                     b.HasIndex("OvercategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
 
                     b.HasData(
                         new
@@ -120,7 +122,7 @@ namespace WebStore.Migrations
                     b.Property<double>("AverageRating")
                         .HasColumnType("float");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Currency")
@@ -423,7 +425,7 @@ namespace WebStore.Migrations
                             IsAdmin = true,
                             Login = "admin1",
                             Password = "strongPassword1",
-                            RefreshTokenExpiryTime = new DateTime(2021, 12, 26, 0, 41, 36, 286, DateTimeKind.Local).AddTicks(1304)
+                            RefreshTokenExpiryTime = new DateTime(2021, 12, 25, 23, 2, 51, 566, DateTimeKind.Local).AddTicks(6212)
                         },
                         new
                         {
@@ -432,7 +434,7 @@ namespace WebStore.Migrations
                             IsAdmin = false,
                             Login = "user1",
                             Password = "strongPassword2",
-                            RefreshTokenExpiryTime = new DateTime(2021, 12, 26, 0, 41, 36, 288, DateTimeKind.Local).AddTicks(6794)
+                            RefreshTokenExpiryTime = new DateTime(2021, 12, 25, 23, 2, 51, 569, DateTimeKind.Local).AddTicks(3131)
                         });
                 });
 
@@ -462,9 +464,7 @@ namespace WebStore.Migrations
                 {
                     b.HasOne("WebStore.Data.Entities.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });

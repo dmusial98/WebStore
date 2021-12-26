@@ -43,7 +43,6 @@ namespace WebStore.Controllers
         }
 
         [HttpGet("{id:int}")]
-        //[Authorize]
         public async Task<ActionResult<ProductModel>> Get(int id)
         {
             try
@@ -54,6 +53,25 @@ namespace WebStore.Controllers
 
                 return _mapper.Map<ProductModel>(product);
                 
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"{e.Message}");
+            }
+        }
+
+        
+        [HttpGet("byCategory")]
+        public async Task<ActionResult<ProductModel[]>> GetByCategory(int categoryId)
+        {
+            try
+            {
+                var products = await _repository.GetProductsByCategoryAsync(categoryId);
+
+                if (products == null)
+                    return NotFound();
+
+                return _mapper.Map<ProductModel[]>(products);
             }
             catch (Exception e)
             {

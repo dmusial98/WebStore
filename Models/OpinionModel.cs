@@ -10,7 +10,7 @@ namespace WebStore.Models
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public int Value { get; set; }
+        public int Rating { get; set; }
         public UserModel Critic { get; set; }
     }
 }

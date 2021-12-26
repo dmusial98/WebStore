@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -67,9 +68,23 @@ namespace CoreWebStore.Data
             return await query.FirstAsync();
         }
 
+        public async Task<Category[]> GetAllCategoriesAsync()
+        {
+            var query = _context.Categories;
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Category> GetCategoryByIdAsync(int id)
+        {
+            var query = _context.Categories.Where(c => c.Id == id);
+
+            return await query.FirstAsync();
+        }
+
         public async Task<Product[]> GetAllProductsAsync()
         {
-            var query = _context.Products.Include(p => p.Opinions).ThenInclude(p => p.Critic);
+            var query = _context.Products.Include(p=> p.Category).Include(p => p.Opinions).ThenInclude(p => p.Critic);
 
             return await query.ToArrayAsync();
         }
@@ -79,6 +94,13 @@ namespace CoreWebStore.Data
             var query = _context.Products.Where(p => p.Id == id).Include(p => p.Opinions).ThenInclude(p => p.Critic);
 
             return await query.FirstAsync();
+        }
+
+        public async Task<Product[]> GetProductsByCategoryAsync(int categoryId)
+        {
+            var query = _context.Products.Where(p => p.CategoryId == categoryId);
+
+            return await query.ToArrayAsync();
         }
 
         public async Task<Store> GetStoreAsync()

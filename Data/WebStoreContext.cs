@@ -19,6 +19,7 @@ namespace WebStore.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Opinion> Opinions { get; set; }
         public DbSet<ProductInCart> ProductsInCarts { get; set; }
@@ -53,22 +54,48 @@ namespace WebStore.Data
                     RefreshTokenExpiryTime = DateTime.Now
                 });
 
-            modelBuilder.Entity<Product>().HasData(
+            modelBuilder.Entity<Category>().HasData(
                 new
                 {
                     Id = 1,
-                    Name = "Rakietka Donic Waldner 2000",
-                    Description = "Amatorska rakietka do gry w tenisa stołowego firmy Donic",
-                    Price = 100,
-                    Amount = 25
+                    Name = "Rakietki"
                 },
                 new
                 {
                     Id = 2,
+                    Name = "Stoły do gry"
+                },
+                new
+                {
+                    Id = 3,
+                    Name = "Okładziny"
+                },
+                new
+                {
+                    Id = 4,
+                    Name = "Deski"
+                });
+
+            modelBuilder.Entity<Product>().HasData(
+                new
+                {
+                    Id = 1,
+                    CategoryId = 1,
+                    Name = "Rakietka Donic Waldner 2000",
+                    Description = "Amatorska rakietka do gry w tenisa stołowego firmy Donic",
+                    Price = 100,
+                    Amount = 25,
+                    AverageRating = 4.5
+                },
+                new
+                {
+                    Id = 2,
+                    CategoryId = 2,
                     Name = "Stół do tenisa stolowego Joma 3250",
                     Description = "Stół do gry w tenisa stołowego Joma",
                     Price = 2000,
                     Amount = 5,
+                    AverageRating = 0.0
                 });
 
             modelBuilder.Entity<Opinion>().HasData(
@@ -77,15 +104,15 @@ namespace WebStore.Data
                     Id = 1,
                     ProductId = 1,
                     Content = "Dobry stosunek jakość - cena",
-                    Value = 4,
+                    Rating = 4,
                     CriticId = 2
                 },
-                new 
+                new
                 {
-                    Id=2,
+                    Id = 2,
                     ProductId = 1,
                     Content = "Wszystko w jak największym porządku",
-                    Value = 5,
+                    Rating = 5,
                     CriticId = 1
                 });
 

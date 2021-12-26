@@ -10,6 +10,7 @@ namespace WebStore.Models
     public class ProductModel
     {
         public int Id { get; set; }
+        public CategoryModel Category { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 3)]
         public string Name { get; set; }
@@ -18,8 +19,6 @@ namespace WebStore.Models
         [Required]
         [Range(0, 100_000)]
         public int Price { get; set; }
-        [StringLength(3)]
-        public string Currency { get; set; }
         [Required]
         [Range(0, 500)]
         public int Amount { get; set; }
