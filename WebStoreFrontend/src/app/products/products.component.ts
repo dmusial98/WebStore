@@ -32,15 +32,18 @@ export class ProductsComponent implements OnInit {
 
   onCategoryChosen(categoryId: number): void {
 
-    if (categoryId < 0) {
+    if (categoryId < 0)
+    {
       this.productSubscription = this.productService
         .getAllProductsWithOpinions()
         .subscribe(_products => this.products = _products);
     }
-
-    this.productSubscription = this.productService
-      .getProductsByCategory(categoryId)
-      .subscribe(_products => this.products = _products);
+    else
+    {
+      this.productSubscription = this.productService
+        .getProductsByCategory(categoryId)
+        .subscribe(_products => this.products = _products);
+    }
   }
 
   onSortProductsClick(sortBy: string): void {
