@@ -23,5 +23,6 @@ namespace WebStore.Models
         [Range(0, 500)]
         public int Amount { get; set; }
         public List<OpinionModel> Opinions { get; set; }
+        public double AverageRating { get; set; }
     }
 }

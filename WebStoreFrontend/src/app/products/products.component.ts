@@ -32,6 +32,8 @@ export class ProductsComponent implements OnInit {
 
   onCategoryChosen(categoryId: number): void {
 
+    console.log(this.products);
+
     if (categoryId < 0)
     {
       this.productSubscription = this.productService
