@@ -9,7 +9,7 @@ using CoreWebStore.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
 using WebStore.Data.Entities;
-using WebStore.Models;
+using WebStore.Models; 
 
 namespace WebStore.Controllers
 {

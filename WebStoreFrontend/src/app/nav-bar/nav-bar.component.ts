@@ -1,4 +1,7 @@
+import { Subscription } from "rxjs";
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/data/category';
+import { CategoriesService } from "src/app/categories.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  categoriesSubscription: Subscription;
+  categories: Category[];
 
-  ngOnInit(): void {
+  constructor(private categoriesService: CategoriesService)
+  {}
+
+  ngOnInit(): void
+  {
+    this.categoriesSubscription = this.categoriesService
+      .getAllCategories()
+      .subscribe(_categories => this.categories = _categories);
   }
 
 }

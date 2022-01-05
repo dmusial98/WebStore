@@ -13,13 +13,14 @@ import { Category } from 'src/app/data/category'
 })
 export class ProductsComponent implements OnInit {
 
-  productSubscription: Subscription;
+  productSubscription: Subscription;  
   categoriesSubscription: Subscription;
   products: Product[];
   categories: Category[];
   sortByDropdownButtonContent: string = 'Cena: najniższa';
 
-  constructor(private productService: ProductService, private categoriesService: CategoriesService) { }
+  constructor(private productService: ProductService, private categoriesService: CategoriesService)
+  { }
 
   ngOnInit(): void {
     this.productSubscription = this.productService
