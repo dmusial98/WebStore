@@ -23,7 +23,7 @@ export class ProductService {
   }
 
   getProductsByCategory(categoryId: number): Observable<Product[]> {
-    let token = localStorage.getItem("jwt");
+    //let token = localStorage.getItem("jwt");
 
     return this.http.get<Product[]>(`http://localhost:5000/api/products/byCategory?categoryId=${categoryId}`,
       {

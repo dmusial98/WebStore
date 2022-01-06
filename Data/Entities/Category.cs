@@ -9,6 +9,7 @@ namespace WebStore.Data.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string NamePath { get; set; }
         public Category Overcategory { get; set; }
     }
 }

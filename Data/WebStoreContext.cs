@@ -58,22 +58,26 @@ namespace WebStore.Data
                 new
                 {
                     Id = 1,
-                    Name = "Rakietki"
+                    Name = "Rakietki",
+                    NamePath = "rakietki"
                 },
                 new
                 {
                     Id = 2,
-                    Name = "Stoły do gry"
+                    Name = "Stoły do gry",
+                    NamePath = "stoly-do-gry"
                 },
                 new
                 {
                     Id = 3,
-                    Name = "Okładziny"
+                    Name = "Okładziny",
+                    NamePath = "okladziny"
                 },
                 new
                 {
                     Id = 4,
-                    Name = "Deski"
+                    Name = "Deski",
+                    NamePath = "deski"
                 });
 
             modelBuilder.Entity<Product>().HasData(

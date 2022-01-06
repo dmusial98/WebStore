@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ProductService } from "src/app/product.service";
 import { CategoriesService } from "src/app/categories.service"
 import { Subscription } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Product } from 'src/app/data/product'
 import { Category } from 'src/app/data/category'
 
@@ -13,40 +14,130 @@ import { Category } from 'src/app/data/category'
 })
 export class ProductsComponent implements OnInit {
 
-  productSubscription: Subscription;  
+  productSubscription: Subscription;
   categoriesSubscription: Subscription;
   products: Product[];
   categories: Category[];
   sortByDropdownButtonContent: string = 'Cena: najniższa';
+  categoryName: string = null;
 
-  constructor(private productService: ProductService, private categoriesService: CategoriesService)
-  { }
+  isLoadedCategoryNameFromRoute: boolean = false;
+  wasLoadedProductsFromCategory: boolean = false;
+  wasNewCategoryChoosen = false;
+
+  constructor(
+    private productService: ProductService,
+    private categoriesService: CategoriesService,
+    private route: ActivatedRoute,
+    private router: Router) {
+
+  }
 
   ngOnInit(): void {
-    this.productSubscription = this.productService
-      .getAllProductsWithOpinions()
-      .subscribe(_products => this.products = _products);
+
+    //this.isLoadedCategoryNameFromRoute = false;
+    //this.wasLoadedProductsFromCategory = false;
+    //this.products = null;
+    //this.categories = null;
+
+
+    console.log('start ngOnInit, categoryName: ', this.categoryName,
+      'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
+      'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
+
+    this.categoryName = this.route.snapshot.paramMap.get('categoryName');
+
+    console.log('categoryName: ', this.categoryName,
+      'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
+      'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
+
+    if (this.categoryName) {
+      this.isLoadedCategoryNameFromRoute = true;
+      console.log('inside if', 'categoryName: ', this.categoryName,
+        'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
+        'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
+    }
+
     this.categoriesSubscription = this.categoriesService
       .getAllCategories()
       .subscribe(_categories => this.categories = _categories);
+
+    this.productSubscription = this.productService
+      .getAllProductsWithOpinions()
+      .subscribe(_products => this.products = _products);
+
+    console.log('end ngOnInit', this.categories, this.products);
+
+  }
+
+  ngDoCheck(): void {
+
+    if (this.wasNewCategoryChoosen) {
+      this.categoryName = this.route.snapshot.paramMap.get('categoryName');
+
+      if (this.categoryName) {
+        this.isLoadedCategoryNameFromRoute = true;
+        console.log('inside if', 'categoryName: ', this.categoryName,
+          'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
+          'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory,
+          'categories: ', this.categories);
+      }
+
+      this.categoriesSubscription = this.categoriesService
+        .getAllCategories()
+        .subscribe(_categories => this.categories = _categories);
+
+      this.wasNewCategoryChoosen = false;
+      this.wasLoadedProductsFromCategory = false;
+    }
+
+    if (this.isLoadedCategoryNameFromRoute && this.categories && !this.wasLoadedProductsFromCategory) {
+      console.log('doCheck ', this.categories, this.isLoadedCategoryNameFromRoute, !this.wasLoadedProductsFromCategory);
+
+      var category = this.categories.find(c => c.namePath === this.categoryName);
+      console.log(category);
+      var categoryId: number = -1;
+
+      if (category)
+        categoryId = category.id;
+
+      console.log('categoryId = ', categoryId);
+
+      this.productSubscription = this.productService
+        .getProductsByCategory(categoryId)
+        .subscribe(_products => this.products = _products);
+
+      this.wasLoadedProductsFromCategory = true;
+    }
+
   }
 
   onCategoryChosen(categoryId: number): void {
 
-    console.log(this.products);
+    this.wasNewCategoryChoosen = true;
 
-    if (categoryId < 0)
-    {
-      this.productSubscription = this.productService
-        .getAllProductsWithOpinions()
-        .subscribe(_products => this.products = _products);
+    if (categoryId < 0) {
+      this.goToAllProducts();
     }
-    else
-    {
-      this.productSubscription = this.productService
-        .getProductsByCategory(categoryId)
-        .subscribe(_products => this.products = _products);
+    else {
+      console.log('mamy id kategorii = ', categoryId);
+      var category = this.categories.find(c => c.id == categoryId);
+
+      console.log(category);
+      if (category) {
+        this.goToProductsByCategory(category.namePath.toLowerCase());
+      }
     }
+  }
+
+  goToProductsByCategory(newCategoryName: string): void {
+    console.log('mamy routing do', newCategoryName);
+    this.router.navigate(['products', newCategoryName]);
+  }
+
+  goToAllProducts(): void {
+    console.log('mamy routing do products');
+    this.router.navigate(['products']);
   }
 
   onSortProductsClick(sortBy: string): void {
@@ -148,26 +239,26 @@ export class ProductsComponent implements OnInit {
       case 'mark - descending': {
         this.products = this.products.sort((p1, p2) => {
           if (p1.averageRating > p2.averageRating) {
-              return -1;
-            }
-          if (p1.averageRating < p2.averageRating) {
-              return 1;
-            }
-            return 0;
+            return -1;
           }
+          if (p1.averageRating < p2.averageRating) {
+            return 1;
+          }
+          return 0;
+        }
         );
         break;
       }
       case 'mark - growingly': {
         this.products = this.products.sort((p1, p2) => {
           if (p1.averageRating > p2.averageRating) {
-              return 1;
-            }
-          if (p1.averageRating < p2.averageRating) {
-              return -1;
-            }
-            return 0;
+            return 1;
           }
+          if (p1.averageRating < p2.averageRating) {
+            return -1;
+          }
+          return 0;
+        }
         );
         break;
       }
