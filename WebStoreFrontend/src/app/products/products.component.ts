@@ -23,7 +23,6 @@ export class ProductsComponent implements OnInit {
 
   isLoadedCategoryNameFromRoute: boolean = false;
   wasLoadedProductsFromCategory: boolean = false;
-  wasNewCategoryChoosen = false;
 
   constructor(
     private productService: ProductService,
@@ -66,7 +65,7 @@ export class ProductsComponent implements OnInit {
 
   ngDoCheck(): void {
 
-    if (this.wasNewCategoryChoosen) {
+    if (this.route.snapshot.paramMap.get('categoryName') != this.categoryName) {
       this.categoryName = this.route.snapshot.paramMap.get('categoryName');
 
       if (this.categoryName) {
@@ -81,7 +80,6 @@ export class ProductsComponent implements OnInit {
         .getAllCategories()
         .subscribe(_categories => this.categories = _categories);
 
-      this.wasNewCategoryChoosen = false;
       this.wasLoadedProductsFromCategory = false;
     }
 
@@ -107,8 +105,6 @@ export class ProductsComponent implements OnInit {
   }
 
   onCategoryChosen(categoryId: number): void {
-
-    this.wasNewCategoryChoosen = true;
 
     if (categoryId < 0) {
       this.goToAllProducts();
@@ -263,4 +259,14 @@ export class ProductsComponent implements OnInit {
 
   }
 
+
+  ngOnDestroy(): void {
+
+    if (this.categoriesSubscription)
+      this.categoriesSubscription.unsubscribe();
+
+    if (this.productSubscription)
+      this.productSubscription.unsubscribe();
+
+  }
 }
