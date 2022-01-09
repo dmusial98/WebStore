@@ -8,6 +8,7 @@ namespace WebStore.Data.Entities
         public Category Category { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
+        public string NamePath { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
         public string Currency { get; set; }

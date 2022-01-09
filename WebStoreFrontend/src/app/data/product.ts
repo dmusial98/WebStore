@@ -5,6 +5,7 @@ export class Product {
   id: number
   category: Category
   name: String
+  namePath: String
   description: String
   price: number
   currency: String

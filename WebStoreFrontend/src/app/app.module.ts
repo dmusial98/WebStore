@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { ProductComponent } from './product/product.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -25,7 +26,8 @@ export function tokenGetter() {
     ProductsComponent,
     LoginComponent,
     HomeComponent,
-    NavBarComponent
+    NavBarComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

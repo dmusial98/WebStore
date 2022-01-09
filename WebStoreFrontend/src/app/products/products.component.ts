@@ -35,12 +35,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //this.isLoadedCategoryNameFromRoute = false;
-    //this.wasLoadedProductsFromCategory = false;
-    //this.products = null;
-    //this.categories = null;
-
-
     console.log('start ngOnInit, categoryName: ', this.categoryName,
       'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
       'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
