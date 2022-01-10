@@ -17,9 +17,13 @@
             Kategorie
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li class="my-1 row">
+              <div class="text-center">
+                <a (click)="onCategoryChosen(-1)" class="dropdown-item">Wszystkie</a>
+              </div>
+            </li>
             <li *ngFor="let category of categories" class="my-1 row">
               <div class="text-center">
-                <!--<a (click)="onCategoryChosen(category.id)" class="btn btn-light">{{category.name}}</a>-->
                 <a (click)="onCategoryChosen(category.id)" class="dropdown-item">{{category.name}}</a>
               </div>
             </li>

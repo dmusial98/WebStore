@@ -120,6 +120,21 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  onProductChoosen(productId: number): void {
+    if (productId >= 0) {
+      
+      var product = this.products.find(p => p.id == productId);
+
+      if (product) {
+        var category = this.categories.find(c => c.id = product.id);
+        if (category) {
+          console.log('navigate to product', product.name);
+          this.router.navigate(['products', category.namePath, product.namePath]);
+        }
+      }
+    }
+  }
+
   goToProductsByCategory(newCategoryName: string): void {
     console.log('mamy routing do', newCategoryName);
     this.router.navigate(['products', newCategoryName]);
