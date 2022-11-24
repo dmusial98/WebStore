@@ -108,5 +108,8 @@
       }
     }
   },
-  "defaultProject": "WebStoreFrontend"
+  "defaultProject": "WebStoreFrontend",
+  "cli": {
+    "analytics": false
+  }
 }
