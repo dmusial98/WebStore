@@ -1,5 +1,6 @@
 export class Opinion {
   id: number
   content: String
-  value: number
+  rating: number
+  criticLogin: string
 }

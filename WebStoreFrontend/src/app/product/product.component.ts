@@ -4,6 +4,7 @@ import { CategoriesService } from "src/app/categories.service"
 import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Product } from 'src/app/data/product'
+import { Opinion } from 'src/app/data/opinion'
 import { Category } from 'src/app/data/category'
 
 @Component({
@@ -23,6 +24,7 @@ export class ProductComponent implements OnInit {
   productSubscription: Subscription;
   categorySubscription: Subscription;
   product: Product;
+  opinions: Opinion[];
   products: Product[];
   category: Category;
   categories: Category[];
@@ -36,7 +38,7 @@ export class ProductComponent implements OnInit {
     this.categoryNameFromRoute = this.route.snapshot.paramMap.get('categoryName');
     this.productNameFromRoute = this.route.snapshot.paramMap.get('productName');
 
-    console.log(this.categoryNameFromRoute, this.productNameFromRoute);
+    // console.log(this.categoryNameFromRoute, this.productNameFromRoute);
 
     this.categorySubscription = this.categoriesService
       .getAllCategories().subscribe(
@@ -59,7 +61,11 @@ export class ProductComponent implements OnInit {
         //TODO: make routing to 404 not found
       }
 
-      console.log('this.category = ', this.category, 'this.product = ', this.product);
+      if (this.product.opinions.length != 0)
+        this.opinions = this.product.opinions;
+      console.log('this.category = ', this.category, 'this.product = ', this.product, 'opinions = ', this.opinions);
+
+
 
       this.wasLoadedProduct = true;
     }

@@ -108,6 +108,15 @@
       <!--formularz do dodania wlasnej opinii-->
       <div class="col">
         <div class="row mt-4">
+          <div *ngIf="opinions == null" class="container">
+            <div class="row mt-1">
+              <div class="col-4">
+              </div>
+              <h3 class="col-4">Brak opinii, bądź pierwszy!</h3>
+              <div class="col-4">
+              </div>
+            </div>
+          </div>
           <h3>
             Dodaj swoją opinię
           </h3>
@@ -209,50 +218,45 @@
                   </div>
                 </div>
 
-                
+
 
               </div>
             </div>
           </form>
         </div>
       </div>
-
-
-
-
-      <!--opinie dotyczace produktu-->
-
     </div>
 
-    <div ngFor="let opinion in opinions" class="row mt-3 border border-info rounded bg-light">
-      <div class="col">
-        <div class="row mt-3">
-          <h5>Użytkownik: nazwa użytkownika</h5>
-        </div>
-        <div class="row">
-          <div class="col-1">
-            <h5>Ocena:</h5>
+    <!--opinie dotyczace produktu-->
+    <div *ngIf="opinions" class="container">
+      <div *ngFor="let opinion of opinions" class="row mt-3 border border-info rounded bg-light">
+        <div class="col">
+          <div class="row mt-3">
+            <h5>Użytkownik: {{opinion.criticLogin}}</h5>
           </div>
-          <div class="col">
+          <div class="row">
+            <div class="col-1">
+              <h5>Ocena:</h5>
+            </div>
+            <div class="col">
               <h5>
-                4,5/5
+                {{opinion.rating}}/5
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                   style="color: orange;" class="mb-1 bi bi-star-fill" viewBox="0 0 16 16">
-                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                 </svg>
               </h5>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <h6>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </h6>
-          
+          <div class="row">
+            <h6>
+              {{opinion.content}}
+            </h6>
+          </div>
         </div>
       </div>
     </div>
-
-
 
   </div>
 </div>

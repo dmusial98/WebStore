@@ -34,22 +34,22 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log('start ngOnInit, categoryName: ', this.categoryName,
-      'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
-      'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
+    // console.log('start ngOnInit, categoryName: ', this.categoryName,
+    //   'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
+    //   'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
 
     this.categoryName = this.route.snapshot.paramMap.get('categoryName');
 
-    console.log('categoryName: ', this.categoryName,
-      'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
-      'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
+    // console.log('categoryName: ', this.categoryName,
+    //   'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
+    //   'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
 
-    if (this.categoryName) {
-      this.isLoadedCategoryNameFromRoute = true;
-      console.log('inside if', 'categoryName: ', this.categoryName,
-        'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
-        'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
-    }
+    // if (this.categoryName) {
+    //   this.isLoadedCategoryNameFromRoute = true;
+    //   console.log('inside if', 'categoryName: ', this.categoryName,
+    //     'isLoadedCategoryFromRoute: ', this.isLoadedCategoryNameFromRoute,
+    //     'wasLoadedProductsFromCategory: ', this.wasLoadedProductsFromCategory);
+    // }
 
     this.categoriesSubscription = this.categoriesService
       .getAllCategories()
@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit {
       .getAllProductsWithOpinions()
       .subscribe(_products => this.products = _products);
 
-    console.log('end ngOnInit', this.categories, this.products);
+    // console.log('end ngOnInit', this.categories, this.products);
 
   }
 
@@ -84,16 +84,16 @@ export class ProductsComponent implements OnInit {
     }
 
     if (this.isLoadedCategoryNameFromRoute && this.categories && !this.wasLoadedProductsFromCategory) {
-      console.log('doCheck ', this.categories, this.isLoadedCategoryNameFromRoute, !this.wasLoadedProductsFromCategory);
+      // console.log('doCheck ', this.categories, this.isLoadedCategoryNameFromRoute, !this.wasLoadedProductsFromCategory);
 
       var category = this.categories.find(c => c.namePath === this.categoryName);
-      console.log(category);
+      // console.log(category);
       var categoryId: number = -1;
 
       if (category)
         categoryId = category.id;
 
-      console.log('categoryId = ', categoryId);
+      // console.log('categoryId = ', categoryId);
 
       this.productSubscription = this.productService
         .getProductsByCategory(categoryId)
@@ -110,7 +110,7 @@ export class ProductsComponent implements OnInit {
       this.goToAllProducts();
     }
     else {
-      console.log('mamy id kategorii = ', categoryId);
+      // console.log('mamy id kategorii = ', categoryId);
       var category = this.categories.find(c => c.id == categoryId);
 
       console.log(category);
@@ -128,7 +128,7 @@ export class ProductsComponent implements OnInit {
       if (product) {
         var category = this.categories.find(c => c.id = product.id);
         if (category) {
-          console.log('navigate to product', product.name);
+          // console.log('navigate to product', product.name);
           this.router.navigate(['products', category.namePath, product.namePath]);
         }
       }
@@ -136,12 +136,12 @@ export class ProductsComponent implements OnInit {
   }
 
   goToProductsByCategory(newCategoryName: string): void {
-    console.log('mamy routing do', newCategoryName);
+    // console.log('mamy routing do', newCategoryName);
     this.router.navigate(['products', newCategoryName]);
   }
 
   goToAllProducts(): void {
-    console.log('mamy routing do products');
+    // console.log('mamy routing do products');
     this.router.navigate(['products']);
   }
 
