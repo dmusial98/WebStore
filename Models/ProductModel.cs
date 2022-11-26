@@ -35,5 +35,6 @@ namespace WebStore.Models
         public List<OpinionModel> Opinions { get; set; }
         
         public double AverageRating { get; set; }
+
     }
 }
