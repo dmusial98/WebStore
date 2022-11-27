@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Product } from 'src/app/data/product'
 import { Opinion } from 'src/app/data/opinion'
 import { Category } from 'src/app/data/category'
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-product',

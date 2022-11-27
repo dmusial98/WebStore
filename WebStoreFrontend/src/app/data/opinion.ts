@@ -3,4 +3,5 @@ export class Opinion {
   content: String
   rating: number
   criticLogin: string
+  time: Date
 }

@@ -111,7 +111,8 @@ namespace WebStore.Data
                     ProductId = 1,
                     Content = "Dobry stosunek jakość - cena",
                     Rating = 4,
-                    CriticId = 2
+                    CriticId = 2,
+                    Time = new DateTime(2021, 2, 20, 14, 57, 21)
                 },
                 new
                 {
@@ -119,7 +120,8 @@ namespace WebStore.Data
                     ProductId = 1,
                     Content = "Wszystko w jak największym porządku",
                     Rating = 5,
-                    CriticId = 1
+                    CriticId = 1,
+                    Time = new DateTime(2021, 2, 21, 8, 33, 43)
                 });
 
             modelBuilder.Entity<Store>().HasData(

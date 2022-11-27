@@ -12,5 +12,6 @@ namespace WebStore.Models
         public string Content { get; set; }
         public int Rating { get; set; }
         public string CriticLogin { get; set; }
+        public DateTime Time { get; set; }
     }
 }

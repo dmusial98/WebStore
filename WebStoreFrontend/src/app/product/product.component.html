@@ -232,6 +232,11 @@
       <div *ngFor="let opinion of opinions" class="row mt-3 border border-info rounded bg-light">
         <div class="col">
           <div class="row mt-3">
+            <h6>
+              {{opinion.time | date: 'dd.MM.yyyy HH:mm'}}
+          </h6>
+          </div>
+          <div class="row">
             <h5>Użytkownik: {{opinion.criticLogin}}</h5>
           </div>
           <div class="row">
