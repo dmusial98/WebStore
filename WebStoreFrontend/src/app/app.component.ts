@@ -9,3 +9,5 @@ export class AppComponent {
   title = 'WebStoreFrontend';
 
 }
+
+

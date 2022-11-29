@@ -59,7 +59,7 @@ namespace WebStore.Controllers
                 var accessToken = _tokenService.GenerateAccessToken(claims);
                 var refreshToken = _tokenService.GenerateRefreshToken();
                 user.RefreshToken = refreshToken;
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(10);
 
                 await _repository.SaveChangesAsync();
 
@@ -73,6 +73,33 @@ namespace WebStore.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"{ex.Message}");
             }
+        }
+
+        [HttpPost]
+        [Route("refresh")]
+        public async Task<ActionResult> Refresh(TokenApiModel tokenApiModel)
+        {
+            if (tokenApiModel is null)
+                return BadRequest("Invalid client request");
+
+            string accessToken = tokenApiModel.AccessToken;
+            string refreshToken = tokenApiModel.RefreshToken;
+            
+            var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
+            var username = principal.Identity.Name; //this is mapped to the Name claim by default
+            var user = await _repository.GetUserByLoginAsync(principal.Identity.Name);
+
+            if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+                return BadRequest("Invalid client request");
+            var newAccessToken = _tokenService.GenerateAccessToken(principal.Claims);
+            var newRefreshToken = _tokenService.GenerateRefreshToken();
+            user.RefreshToken = newRefreshToken;
+            await _repository.SaveChangesAsync();
+            return Ok(new
+            {
+                Token = newAccessToken,
+                RefreshToken = newRefreshToken
+            });
         }
 
         [HttpPost, Authorize]

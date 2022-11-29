@@ -7,6 +7,7 @@ import { Product } from 'src/app/data/product'
 import { Opinion } from 'src/app/data/opinion'
 import { Category } from 'src/app/data/category'
 import { formatDate } from '@angular/common';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-product',
@@ -18,6 +19,7 @@ export class ProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoriesService: CategoriesService,
+    private loginService: LoginService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -70,6 +72,10 @@ export class ProductComponent implements OnInit {
 
       this.wasLoadedProduct = true;
     }
+  }
+
+  isLoggedIn() : boolean {
+    return this.loginService.isUserAuthenticated();
   }
 
 }

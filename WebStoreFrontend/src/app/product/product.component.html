@@ -103,7 +103,7 @@
     </div>
 
     <!--opinie-->
-    <div class="row border border-info rounded bg-light">
+    <div *ngIf="isLoggedIn()" class="row border border-info rounded bg-light">
 
       <!--formularz do dodania wlasnej opinii-->
       <div class="col">
@@ -227,6 +227,33 @@
       </div>
     </div>
 
+    <div *ngIf="!isLoggedIn()" class="container">
+      <div class="row my-5">
+        <div class="col"></div>
+        <div class="col">
+          <!-- <a class="nav-link" aria-current="page" href="#"> -->
+            <button class="btn btn-secondary">
+              <h5>
+                Aby ocenić produkt, zaloguj się
+              </h5>
+            </button>
+          <!-- </a> -->
+        </div>
+        <div class="col"></div>
+      </div>
+      <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+      <div class="row">
+
+      </div>
+    </div>
+
     <!--opinie dotyczace produktu-->
     <div *ngIf="opinions" class="container">
       <div *ngFor="let opinion of opinions" class="row mt-3 border border-info rounded bg-light">
@@ -234,7 +261,7 @@
           <div class="row mt-3">
             <h6>
               {{opinion.time | date: 'dd.MM.yyyy HH:mm'}}
-          </h6>
+            </h6>
           </div>
           <div class="row">
             <h5>Użytkownik: {{opinion.criticLogin}}</h5>

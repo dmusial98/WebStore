@@ -11,18 +11,18 @@ export class AuthGuard implements CanActivate {
 
   async canActivate() {
 
-    return true;
+    // return true;
 
-    //const token = localStorage.getItem("jwt");
-    //if (token && !this.jwtHelper.isTokenExpired(token)) {
-    //  /*console.log(this.jwtHelper.decodeToken(token));*/
-    //  return true;
-    //}
-    //const isRefreshSuccess = await this.tryRefreshingTokens(token);
-    //if (!isRefreshSuccess) {
-    //  this.router.navigate(["login"]);
-    //}
-    //return isRefreshSuccess;
+    const token = localStorage.getItem("jwt");
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+     console.log(this.jwtHelper.decodeToken(token));
+     return true;
+    }
+    const isRefreshSuccess = await this.tryRefreshingTokens(token);
+    if (!isRefreshSuccess) {
+     this.router.navigate(["login"]);
+    }
+    return isRefreshSuccess;
   }
 
   private async tryRefreshingTokens(token: string | null): Promise<boolean> {
